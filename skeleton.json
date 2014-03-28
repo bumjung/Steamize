@@ -1,0 +1,21 @@
+{
+	"steam_id":-1,
+	"account":{
+		"name":"",
+		"avatar":"",
+		"total_hours_played":-1,
+		"total_spent":-1,
+		"total_completed_achv":-1
+	},
+	"games":[
+		{
+        	"app_id":-1,
+    		"achievements":[],
+    		"all_achv":-1,
+    		"hours_played":-1,
+    		"name":"",
+    		"price":-1,
+    		"completed_achv":-1
+        }
+	]
+}
