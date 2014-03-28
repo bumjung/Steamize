@@ -6,12 +6,12 @@ from django.template import Context, loader, RequestContext
 import sys
 import os
 import math
-import urllib2
+#import urllib2
 
 def index(request) :
 
-	jsonurltest=urllib2.urlopen('http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=753C3B3FF04FD9A4B520F90BB97059D6&steamids=76561198064586875').read()
-	jsonurl=urllib2.urlopen('http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=753C3B3FF04FD9A4B520F90BB97059D6&steamids=76561198064586875')
+	#jsonurltest=urllib2.urlopen('http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=753C3B3FF04FD9A4B520F90BB97059D6&steamids=76561198064586875').read()
+	#jsonurl=urllib2.urlopen('http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=753C3B3FF04FD9A4B520F90BB97059D6&steamids=76561198064586875')
 	
 	json=simplejson.load(jsonurl)
 
