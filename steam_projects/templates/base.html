@@ -1,0 +1,126 @@
+{% load humanize %}
+<!DOCTYPE html>
+<html lang="en">
+	<title>Summary</title>
+	<head>
+		 {% load staticfiles %}
+		 <link rel="stylesheet" href={% static "css/test.css" %} >
+		 <!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+	</head>
+	<body style="padding-top:70px; background-color:#333;">
+	    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	      <div class="container-fluid">
+	        <div class="navbar-header">
+	          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	            <span class="sr-only">Toggle navigation</span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	          </button>
+	          <a class="navbar-brand" href="#">STEAM SUMMARY</a>
+	        </div>
+	        <div class="navbar-collapse collapse">
+	          <ul class="nav navbar-nav navbar-right">
+	            <li><a href="#">Login</a></li>
+	            <li><a href="#">Settings</a></li>
+	            <li><a href="#">Help</a></li>
+	          </ul>
+	          <form class="navbar-form navbar-right">
+	            <input type="text" class="form-control" placeholder="Search by user ID..">
+	          </form>
+	        </div>
+	      </div>
+	    </div>
+
+	    <div class="container" style="color:#fff; margin-bottom:20px;">
+		<img src="{{ profile.avatar }}"/><span style="margin-left: 20px; font-size:18px;">{{profile.personaname}}</span>
+		</div>
+	    <div class="container">
+	    	<div class="row" style="background-color:#ce616e;">
+	    		<div class="col-md-12 center-block" style="padding:20px 0px;margin:0 auto; display:block; color:#fff;">
+	    			<h1 style="margin-left:50px; font-size:40px;">SUMMARY</h1>
+	    		</div>
+	    	</div>
+	    	<div class="row" style="background-color:#444; color:#fff">
+	    		<div class="col-md-4" style="height:200px; border: 2px solid #2f2f2f;">
+	    			<h2 class="text-center" style="font-size:80px; color:#fff;"><span class="glyphicon glyphicon-time" style="font-size:50px;color:#ce616e;"></span> {{ hours_played}}</h2>
+	    			<h5 class="text-center">HOURS PLAYED</h5>
+	    		</div>
+	    		<div class="col-md-4" style="height:200px; border: 2px solid #2f2f2f">
+	    			<h2 class="text-center" style="font-size:80px;"><span class="glyphicon glyphicon-usd" style="font-size:50px;color:#ce616e;"></span> {{ totalSpent }}</h2>
+	    			<h5 class="text-center">SPENT ON GAMES</h5>
+	    		</div>
+	    		<div class="col-md-4" style="height:200px; border: 2px solid #2f2f2f">
+	    			<h2 class="text-center" style="font-size:80px;"><span class="glyphicon glyphicon-stats" style="font-size:50px;color:#ce616e;"></span> {{ totalAchievement }}</h2>
+	    			<h5 class="text-center">ACHIEVEMENTS COMPLETED</h5>
+	    		</div>
+	    	</div>
+	    </div>
+
+	    <div class="container">
+	    	<div class="row" style="background-color:#3498DB;">
+	    		<div class="col-md-12 center-block" style="padding:20px 0px;margin:0 auto; display:block; color:#fff;">
+	    			<h1 style="margin-left:50px; font-size:40px;">GAME LIBRARY</h1>
+	    		</div>
+	    	</div>
+
+	    	<div class="row" style="background-color:#444; color:#fff;">
+
+		    	{% for game in gameLib %}
+		    	{% if game.playtime_forever > 0 %}
+	    		<div class="col-md-3" style="height:auto; border: 1px solid #2f2f2f; padding:0;">
+	    			<img src="http://cdn4.steampowered.com/v/gfx/apps/{{game.appid}}/header_292x136.jpg">
+		    		<!--<img src="http://media.steampowered.com/steamcommunity/public/images/apps/{{game.appid}}/{{game.img_logo_url}}.jpg" style="padding:5px;width:100%;"/>-->
+		    	</div>
+		    	{% endif %}
+		    	{% endfor %}
+	    	</div>
+	    </div>
+
+	    <!--<div class="container">
+	    	<div class="row" style="background-color:#10b256;">
+	    		<div class="col-md-12 center-block" style="padding:20px 0px;margin:0 auto; display:block; color:#fff;">
+	    			<h1 style="margin-left:50px; font-size:40px;">ACHIEVEMENTS</h1>
+	    		</div>
+	    	</div>
+
+
+	    	<div class="row" style="background-color:#444; color:#fff;">
+
+		    	{% for game in gameLib %}
+		    	{% if game.playtime_forever > 0 %}
+	    		<div class="col-md-2" style="height:auto; border: 1px solid #2f2f2f; padding:0;">
+		    		<img src="http://media.steampowered.com/steamcommunity/public/images/apps/{{game.appid}}/{{game.img_icon_url}}.jpg" style="padding:5px;"/>
+		    	</div>
+		    	{% endif %}
+		    	{% endfor %}
+	    	</div>
+	    </div>-->
+
+	    <div class="container">
+	    	<div class="row">
+	    		<div class="col-md-12" style="color: #939393; text-align:center; margin: 20px 0">
+	    				Powered by <a href="http://store.steampowered.com/" style="color: #fff">Steam</a><br/>
+	    				© 2014 All content is the copyright of it's respective owners<br/>Developed by Paul Kim
+	    		</div>
+	    	</div>
+	    </div>
+
+
+
+
+
+	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	    <!-- Include all compiled plugins (below), or include individual files as needed -->
+	    <script src="js/bootstrap.min.js"></script>
+	</body>
+
+		<!--
+		TESTs
+		{{ test }}-->
+</html>
