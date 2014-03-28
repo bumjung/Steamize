@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+
+{% block body_content %}
+	<div id="index" class="container" style="margin-top:60px;">
+		<div class="row">
+			<div class="col-md-12" style="text-align:center">
+				<h1>Steamize</h1>
+			       <div class="row">
+					  <div class="col-md-offset-3 col-md-6">
+
+					    <form id="id-form" role="form" action="get_profile" method="get">
+					      <input type="text" class="input" name="steamid" placeholder="SEARCH A STEAM ID...">
+					      <input type="submit" style="display:none"/>
+					    </form>
+					    <span style="color:#939393; display:block; font-style:italic; margin-top:10px;">For example: 76561198064586875</span>
+					  </div>
+					</div>
+			</div>
+	</div>
+{% endblock %}
+{% block footer_style %}position:absolute; bottom:0;{% endblock %}

@@ -1,0 +1,177 @@
+{% extends "summary_base.html" %}
+{% load staticfiles %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href={% static 'css/nv.d3.css' %}/>
+{% endblock %}
+
+{% block nav_form_action %}/summary/get_profile{% endblock %}
+
+{% block summary_content %}
+	<div class="container" style="width:950px">
+		<div class="row" id="main-summary" style="background-color:#ce616e;">
+			<div class="col-md-12 center-block inner-block">
+				<h1 style="margin-left:50px; font-size:40px;">{{ game.name|upper }}</h1>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="row" id="hours-played" style="background-color:#444; color:#fff">
+					<div class="col-md-4" style="height:200px; border: 2px solid #2f2f2f;">
+						<h2 class="text-center" style="font-size:80px; color:#fff;"><span class="glyphicon glyphicon-time" style="font-size:50px;color:#ce616e;"></span> {{ game.hours_played }}</h2>
+						<h5 class="text-center">HOURS PLAYED</h5>
+					</div>
+					<div class="col-md-4" id="total-spent" style="height:200px; border: 2px solid #2f2f2f">
+						<h2 class="text-center" style="font-size:80px;"><span class="glyphicon glyphicon-usd" style="font-size:50px;color:#ce616e;"></span> {% ifnotequal game.price -1 %}{{ game.price }}{% else %}0{% endifnotequal %}</h2>
+						<h5 class="text-center">SPENT ON GAME</h5>
+					</div>
+					<div class="col-md-4" id="total-achievement" style="height:200px; border: 2px solid #2f2f2f">
+						<h2 class="text-center" style="font-size:80px;"><span class="glyphicon glyphicon-stats" style="font-size:50px;color:#ce616e;"></span> {% ifnotequal game.completed_achv -1 %}{{ game.completed_achv }}{% else %}0{% endifnotequal %}</h2>
+						<h5 class="text-center">ACHIEVEMENTS COMPLETED</h5>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container" style="width:950px">
+		<div class="row" id="section-library" style="background-color:#3498DB;">
+			<div class="col-md-12 center-block inner-block">
+				<h1 style="margin-left:50px;">HOURS PLAYED</h1>
+			</div>
+		</div>
+
+		<div class="row" style="background-color:#444; padding:50px;">
+			<div class="col-md-12">
+				<div class="col-md-6" style="height:400px;">
+					<div id="chart" style="height:100%;">
+						<svg></svg>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div id="hours_played_list">
+						<h3 style="color:#fff; margin-bottom:30px;">YOU'VE PLAYED FOR... </h3>
+						<!--style="font-size:20px; color:#fff;margin-bottom:30px;display:block"-->
+						<ul>
+							<li><span style="float:left;color:#3498DB;">{{hours_time.weeks}}</span> WEEK{% ifnotequal hours_time.weeks 1 %}S{% endifnotequal %}</li>
+							<li><span style="float:left;color:#3498DB;">{{hours_time.days}}</span> DAY{% ifnotequal hours_time.days 1 %}S{% endifnotequal %}</li>
+							<li><span style="float:left;color:#3498DB;">{{hours_time.hours}}</span> HOUR{% ifnotequal hours_time.hours 1 %}S{% endifnotequal %}</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container" style="width:950px">
+		<div class="row" id="section-achievements" style="background-color:#10b256;">
+			<div class="col-md-12 center-block inner-block">
+				<h1 style="margin-left:50px; font-size:40px;">ACHIEVEMENTS</h1>
+			</div>
+		</div>
+
+		<div class="row" style="background-color:#444; padding:50px;">
+			<div class="col-md-12">
+				<h4 style="color:#fff; font-size:24px">COMPLETED ACHIEVEMENTS</h4>
+				<div style="margin:30px 0">
+					<div class="progress progress-striped active" style="margin:0 auto; width:700px;">
+					  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{ achv_data.0 }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ achv_data.0 }}%;">
+					    {{ achv_data.0 }}% Complete
+					  </div>
+					</div>
+				</div>
+				<span style="margin:60px auto; width:650px; display:block; border-bottom:1px dashed #fff"></span>
+				<div style="height:400px;" class="col-md-6">
+					<div id="chart2" style="height:100%;">
+						<h3 style="color:#fff; margin-bottom:30px;">COMPARED TO ALL YOUR COMPLETED ACHIEVEMENTS...</h3>
+						<svg></svg>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div id="achievements_full_list">
+						<h3 style="color:#fff; margin-bottom:30px; text-align:center">List of Completed Achievements</h3>
+						<ul>
+							{% if game.achievements %}
+								{% for achv in game.achievements %}
+								<li> {{ achv|upper }} </li>
+								{% endfor %}
+							{% else %}
+								<li style="margin-top:30px;font-style:italic;"> You have no achievements </li>
+							{% endif %}
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block bottomscripts %}
+	{{ block.super }}
+    <script>
+        var myColors = ["#3498db", "#e67e22", "#2ca02c", "#d62728", "#9467bd", "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22", "#17becf"];
+	    d3.scale.myColors = function() {
+	        return d3.scale.ordinal().range(myColors);
+	    };
+        nv.addGraph(function() {
+          var chart = nv.models.pieChart()
+              .x(function(d) { return d.label })
+              .y(function(d) { return d.value })
+              .showLabels(true)
+              .color(d3.scale.myColors().range());
+              
+            d3.select("#chart svg")
+                .datum(exampleData())
+                .transition().duration(350)
+                .call(chart);
+
+          return chart;
+        });
+        //Pie chart example data. Note how there is only a single array of key-value pairs.
+        function exampleData() {
+          return  [
+              { 
+                "label": '{{game.name}}',
+                "value" : parseInt('{{hr_data.0}}')
+              },
+              { 
+                "label": 'Others',
+                "value" : parseInt('{{hr_data.1}}')
+              }
+            ];
+        }
+    </script>
+
+    <script>
+        var myColors2 = ["#2ecc71", "#e74c3c"];
+	    d3.scale.myColors2 = function() {
+	        return d3.scale.ordinal().range(myColors2);
+	    };
+        nv.addGraph(function() {
+          var chart = nv.models.pieChart()
+              .x(function(d) { return d.label })
+              .y(function(d) { return d.value })
+              .showLabels(true).color(d3.scale.myColors2().range());
+            d3.select("#chart2 svg")
+                .datum(exampleData2())
+                .transition().duration(350)
+                .call(chart);
+
+          return chart;
+        });
+        //Pie chart example data. Note how there is only a single array of key-value pairs.
+        function exampleData2() {
+          return  [
+              { 
+                "label": '{{game.name}}',
+                "value" : parseInt('{{achv_data.1}}')
+              },
+              { 
+                "label": 'Other Completed Achievements',
+                "value" : parseInt('{{achv_data.2}}')
+              }
+            ];
+        }
+    </script>
+{% endblock %}
+

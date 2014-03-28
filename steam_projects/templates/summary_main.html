@@ -1,0 +1,83 @@
+{% extends "summary_base.html" %}
+
+{% block nav_form_action %}/summary/get_profile{% endblock %}
+
+{% block summary_content %}
+<div class="container">
+	<div class="row" id="main-summary" style="background-color:#ce616e;">
+		<div class="col-md-12 center-block inner-block">
+			<h1 style="margin-left:50px; font-size:40px;">SUMMARY</h1>
+		</div>
+	</div>
+	<div class="row" id="hours-played" style="background-color:#444; color:#fff">
+		<div class="col-md-4" style="height:200px; border: 2px solid #2f2f2f;">
+			<h2 class="text-center" style="font-size:80px; color:#fff;"><span class="glyphicon glyphicon-time" style="font-size:50px;color:#ce616e;"></span> {{ profile.account.total_hours_played }}</h2>
+			<h5 class="text-center">HOURS PLAYED</h5>
+		</div>
+		<div class="col-md-4" id="total-spent" style="height:200px; border: 2px solid #2f2f2f">
+			<h2 class="text-center" style="font-size:80px;"><span class="glyphicon glyphicon-usd" style="font-size:50px;color:#ce616e;"></span> {{ profile.account.total_spent }}</h2>
+			<h5 class="text-center">SPENT ON GAMES</h5>
+		</div>
+		<div class="col-md-4" id="total-achievement" style="height:200px; border: 2px solid #2f2f2f">
+			<h2 class="text-center" style="font-size:80px;"><span class="glyphicon glyphicon-stats" style="font-size:50px;color:#ce616e;"></span> {{ profile.account.total_completed_achv }}</h2>
+			<h5 class="text-center">ACHIEVEMENTS COMPLETED</h5>
+		</div>
+	</div>
+</div>
+
+<div class="container">
+	<div class="row"  id="section-library" style="background-color:#3498DB;">
+		<div class="col-md-12 center-block inner-block">
+			<h1 style="margin-left:50px; font-size:40px;">GAME LIBRARY</h1>
+		</div>
+	</div>
+
+	<div class="row" style="background-color:#444; color:#fff;">
+
+    	{% for game in profile.games %}
+		<div class="col-md-3 image-wrapper">
+			<a href="/summary/game/{{profile.steam_id}}/{{game.app_id}}/" style="padding:0;margin:0;"><img class='game_icon_image' src="http://cdn4.steampowered.com/v/gfx/apps/{{game.app_id}}/header_292x136.jpg" onerror="imgError(this);"/></a>
+    		<!--<img src="http://media.steampowered.com/steamcommunity/public/images/apps/{{game.appid}}/{{game.img_logo_url}}.jpg" style="padding:5px;width:100%;"/>-->
+    	</div>
+    	{% endfor %}
+	</div>
+</div>
+<div class="container">
+	<div class="row" id="section-achievements" style="background-color:#10b256;">
+		<div class="col-md-12 center-block inner-block">
+			<h1 style="margin-left:50px; font-size:40px;">ACHIEVEMENTS</h1>
+		</div>
+	</div>
+	<div class="row" style="background-color:#444; color:#fff;">
+    	{% for achv in achv_preview %}
+		<a class="preview" href="/summary/game/{{profile.steam_id}}/{{achv.app_id}}"><div class="col-md-6 inner-preview" style="height:auto; border: 1px solid #2f2f2f; padding:10px;">
+    		<i class="fa fa-trophy fa-3x" style="color: #10b256; font-size:30px;"></i>
+    		<span style="margin-left:10px; font-size:20px;">{{achv.achievement|upper}}</span>
+    		<br/>
+    		<span style="font-size:10px; margin-top:5px; color: #939393; float:right;">{{achv.name|upper}}</span>
+    		<!--{{achiv.2}}-->
+    	</div></a>
+    	{% endfor %}
+	</div>
+</div>
+
+<!--<div class="container">
+	<div class="row" style="background-color:#7b66c8;">
+		<div class="col-md-12 center-block" style="padding:20px 0px;margin:0 auto; display:block; color:#fff;">
+			<h1 style="margin-left:50px; font-size:40px;">FRIENDS</h1>
+		</div>
+	</div>
+
+	<div class="row" style="background-color:#444; color:#fff;">
+
+    	{% for friends in friendsList %}
+    	{% if friends.friend_since > 0 %}
+		<div class="col-md-2" style="height:auto; border: 1px solid #2f2f2f; padding:0;">
+			<span class="glyphicon glyphicon-user"></span>
+			{{friends.steamid}}
+    	</div>
+    	{% endif %}
+    	{% endfor %}
+	</div>
+</div>-->
+{% endblock %}
