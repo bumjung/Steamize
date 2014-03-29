@@ -33,14 +33,13 @@ def get_profile(request) :
 
 #@cache_page(60 * 5)
 def profile(request, steam_id=-1) :
-	print(steam_id)
 	if(steam_id == -1):
 		steam_id=request.GET.get('steamid')
 	key='753C3B3FF04FD9A4B520F90BB97059D6' # TODO: HIDE KEY
 	#steamid=request.GET.get('steamid')#'76561198064586875' # TODO: INPUT request.GET.get('steamid') FROM INDEX
 	#76561198064586875 paul
 	#76561198035798554 rix
-	print(steam_id)
+
 	# Start time count for entire python build
 	startTimeTotal = datetime.now() 
 

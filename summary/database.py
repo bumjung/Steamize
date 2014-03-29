@@ -4,8 +4,22 @@ from pymongo import Connection
 from bson.objectid import ObjectId
 from bson.json_util import dumps
 
-connection=Connection()
-db=connection['steam_accounts']
+server='oceanic.mongohq.com'
+port=10097
+db_name='steam_accounts'
+username="bum"
+password='jung'
+
+print ('Connecting...')
+connection=Connection(server, port)
+print('Done Connecting')
+print('Getting database...')
+db=connection[db_name]
+print('Done Getting Database')
+print('Authenticating...')
+db.authenticate(username,password)
+print('Done Authenticating')
+
 profiles=db.profiles
 
 class steamAcc(object):

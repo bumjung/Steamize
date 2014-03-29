@@ -1,2 +1,5 @@
 mongo_data/
 mongodb/
+static/
+*.pyc
+venv
