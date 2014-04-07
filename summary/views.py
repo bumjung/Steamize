@@ -250,7 +250,7 @@ def game(request,steam_id,app_id) :
 	hr_data_other=profile['account']['total_hours_played']-hr_data_game
 	achv_data_game=game['completed_achv']
 	achv_data_other=profile['account']['total_completed_achv']-achv_data_game
-	achv_data_percent=int(round((float(game['completed_achv'])/float(profile['account']['total_completed_achv'])) * 100))
+	achv_data_percent=int(round((float(game['completed_achv'])/float(game['all_achv'])) * 100))#float(profile['account']['total_completed_achv'])) * 100))
 	#print(achv_data_percent)
 	#print(hr_data_game)
 	#print(hr_data_other)
