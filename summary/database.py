@@ -23,12 +23,12 @@ print('Done Authenticating')
 
 class steamAcc(object):
 	
-	profiles=db.profiles
-	
+	collection=db.profiles
+
 	@staticmethod
 	def init_account(steam_id):
-		if profiles.find({'steam_id':steam_id}).count() == 0 :
-			profiles.insert({
+		if collection.find({'steam_id':steam_id}).count() == 0 :
+			collection.insert({
 				"steam_id":steam_id,
 				"account":{
 					"name":"",
@@ -41,8 +41,8 @@ class steamAcc(object):
 
 	@staticmethod
 	def init_game(steam_id,app_id):
-		if profiles.find({"steam_id":steam_id,"games.app_id":app_id}).count() == 0 :
-			profiles.update(
+		if collection.find({"steam_id":steam_id,"games.app_id":app_id}).count() == 0 :
+			collection.update(
 				{
 				'steam_id':steam_id
 				},
@@ -62,7 +62,7 @@ class steamAcc(object):
 
 	@staticmethod
 	def update_account(steam_id,data):
-		profiles.update(
+		collection.update(
 			{
 				'steam_id': steam_id
 			},
@@ -75,10 +75,10 @@ class steamAcc(object):
 		#76561198064586875
 	@staticmethod
 	def update_games(steam_id, app_id, field_name, field_data):
-		#print("COUNT: " + str(profiles.find({"steam_id":steam_id,"games.app_id":app_id}).count()))
+		#print("COUNT: " + str(collection.find({"steam_id":steam_id,"games.app_id":app_id}).count()))
 		
 			#print("**********NOT INSIDE")
-		profiles.update(
+		collection.update(
 		{
 			'games.app_id':app_id,
 			'steam_id':steam_id
@@ -91,12 +91,12 @@ class steamAcc(object):
 
 	@staticmethod
 	def return_account_info(steam_id):
-		return profiles.find_one({"steam_id":steam_id})
+		return collection.find_one({"steam_id":steam_id})
 
 
 	@staticmethod
 	def return_game_info(steam_id,app_id):
-		for game in profiles.find_one({"steam_id":steam_id},{"games":1, "games.app_id":app_id})['games']:
+		for game in collection.find_one({"steam_id":steam_id},{"games":1, "games.app_id":app_id})['games']:
 			if game['app_id'] == app_id:
 				return game
 
