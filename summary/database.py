@@ -5,8 +5,8 @@ from bson.objectid import ObjectId
 from bson.json_util import dumps
 
 server='oceanic.mongohq.com'
-port=10089#10097
-db_name='steam_accounts'
+port=10017#10097
+db_name='app23517336'
 username="bum"
 password='jung'
 
