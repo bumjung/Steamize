@@ -109,7 +109,7 @@ class performance(object):
 	def get_load_times(profile, costachiv, total):
 
 		if performance.collection.count() == 0:
-			steamAcc.collection.insert({
+			performance.collection.insert({
 				"profile_time":[],
 				"cost_achievements_time":[],
 				"total_load_time":[]
