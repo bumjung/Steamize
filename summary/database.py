@@ -20,9 +20,11 @@ print('Authenticating...')
 db.authenticate(username,password)
 print('Done Authenticating')
 
-profiles=db.profiles
 
 class steamAcc(object):
+	
+	profiles=db.profiles
+	
 	@staticmethod
 	def init_account(steam_id):
 		if profiles.find({'steam_id':steam_id}).count() == 0 :

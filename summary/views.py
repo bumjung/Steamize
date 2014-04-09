@@ -31,7 +31,7 @@ def get_profile(request) :
 	steam_id=request.GET.get('steamid')
 	return HttpResponseRedirect("/summary/profile/"+steam_id)
 
-#@cache_page(60 * 5)
+#@cache_page(60 * 30)
 def profile(request, steam_id=-1) :
 	if(steam_id == -1):
 		steam_id=request.GET.get('steamid')
