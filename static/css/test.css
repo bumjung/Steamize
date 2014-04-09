@@ -108,7 +108,7 @@ ul, li{
 }
 #achievements_full_list ul{
 	height:350px;
-	overflow:scroll;
+	overflow:auto;
 	border-left:1px dashed #2ecc71;
 	border-right:1px dashed #2ecc71;
 }
