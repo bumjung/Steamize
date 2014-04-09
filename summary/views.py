@@ -264,3 +264,13 @@ def game(request,steam_id,app_id) :
 	render=render_to_response('summary_game.html',game_data,context_instance=RequestContext(request))
 	return render
 
+def privacy(request):
+
+	render=render_to_response('summary_privacy.html',{},context_instance=RequestContext(request))
+	return render
+
+def about(request):
+
+	render=render_to_response('summary_about.html',{},context_instance=RequestContext(request))
+	return render
+
