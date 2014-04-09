@@ -21,7 +21,7 @@ db.authenticate(username,password)
 print('Done Authenticating')
 
 class steamAcc(object):
-	print('Connect to Collection')
+	print('Connect to Steam Account Collection')
 	collection=db.profiles
 
 	@staticmethod
@@ -98,4 +98,42 @@ class steamAcc(object):
 		for game in steamAcc.collection.find_one({"steam_id":steam_id},{"games":1, "games.app_id":app_id})['games']:
 			if game['app_id'] == app_id:
 				return game
+
+
+
+class performance(object):
+	print('Connect to Performance Collection')
+	collection=db.performance
+
+	@staticmethod
+	def get_load_times(profile, costachiv, total):
+
+		if performance.collection.count() == 0:
+			steamAcc.collection.insert({
+				"profile_time":[],
+				"cost_achievements_time":[],
+				"total_load_time":[]
+			})
+
+		performance.collection.update(
+			{},
+			{
+				'$push':{
+					'profile_time':profile
+				},
+			},upsert=True)
+		performance.collection.update(
+			{},
+			{
+				'$push':{
+					'cost_achievements_time':costachiv
+				},
+			},upsert=True)
+		performance.collection.update(
+			{},
+			{
+				'$push':{
+					'total_load_time':total
+				},
+			},upsert=True)
 

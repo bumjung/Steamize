@@ -23,6 +23,10 @@ def load_url(url, timeout):
     conn = requests.get(url=url, timeout=timeout) # Get JSON from steam API and save it to conn
     return simplejson.loads(conn.content) # Load stringified JSON to a JSON object
 
+def convert_time(t):
+	(h, m, s) = t.split(':')
+	return float(h) * 3600 + float(m) * 60 + float(s)
+
 def index(request) :
 	render=render_to_response('summary_index.html',{},context_instance=RequestContext(request))
 	return render
@@ -101,8 +105,8 @@ def profile(request, steam_id=-1) :
 
 
 	print("profile:")
-	print(datetime.now()-startTime) # Calculate profile performance time
-
+	performance_profiles=datetime.now()-startTime # Calculate profile performance time
+	print(performance_profiles)
  	# Start time count for second asynchronous load
 	startTime = datetime.now()
 
@@ -181,13 +185,16 @@ def profile(request, steam_id=-1) :
 
 
 	print("cost and achievements:")
-	print(datetime.now()-startTime) # Calculate profile performance time
+	performance_costachiv=datetime.now()-startTime # Calculate profile performance time
+	print(performance_costachiv)
 
 	total_spent=total_spent/100.0 # Convert to dollar amount
 
 	print("Total time:")
-	print(datetime.now()-startTimeTotal)
+	performance_total=datetime.now()-startTimeTotal
+	print(performance_total)
 
+	performance.get_load_times(convert_time(str(performance_profiles)),convert_time(str(performance_costachiv)),convert_time(str(performance_total)))
 
 	account_data_dict = {
 		"name":profile['personaname'],

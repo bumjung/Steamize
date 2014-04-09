@@ -1,3 +1,5 @@
+// steam account
+
 {
 	"steam_id":-1,
 	"account":{
@@ -18,4 +20,14 @@
     		"completed_achv":-1
         }
 	]
+}
+
+
+
+// analytics
+
+{
+	"profile_time":[],
+	"cost_achievements_time":[],
+	"total_load_time":[]
 }
