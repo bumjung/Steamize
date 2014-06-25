@@ -20,9 +20,9 @@ PROJECT_DIR = os.path.dirname(__file__)
 SECRET_KEY = '2bw=d)kwqj3wq$sm*4@tc-v%j*^mwezdcvoek@ftet-k-50u1&'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-TEMPLATE_DEBUG = False
+TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
