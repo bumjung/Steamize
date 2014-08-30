@@ -36,7 +36,7 @@
 
     	{% for game in profile.games %}
 		<div class="col-md-3 image-wrapper">
-			<a href="/summary/game/{{profile.steam_id}}/{{game.app_id}}/" style="padding:0;margin:0;"><img class='game_icon_image' src="http://cdn4.steampowered.com/v/gfx/apps/{{game.app_id}}/header_292x136.jpg" onerror="imgError(this);"/></a>
+			<a href="/summary/game/{{profile.steam_id}}/{{game.app_id}}/" style="padding:0;margin:0;"><img class='game_icon_image' src="http://cdn.akamai.steamstatic.com/steam/apps/{{game.app_id}}/header_292x136.jpg" onerror="imgError(this);"/></a>
     		<!--<img src="http://media.steampowered.com/steamcommunity/public/images/apps/{{game.appid}}/{{game.img_logo_url}}.jpg" style="padding:5px;width:100%;"/>-->
     	</div>
     	{% endfor %}
