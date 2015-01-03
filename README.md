@@ -22,5 +22,5 @@ Classic connect4 online game
 
 ##### Specific Game Page:
 
-![](https://raw.githubusercontent.com/bumjung/steam_projects/master/static/pics/app_example.png)
+![](https://raw.githubusercontent.com/bumjung/steam_projects/master/static/pics/game_page.png)
 
