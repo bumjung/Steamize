@@ -138,7 +138,7 @@ def profile(request, steam_id=-1) :
 	total_spent=0
 	total_achievements=0
 	achievements=[]
-	games=[]
+	gameInfo=[]
 	# We can use a with statement to ensure threads are cleaned up promptly
 	with concurrent.futures.ProcessPoolExecutor(max_workers=50) as executor:
     	# Start the load operations and mark each future with its URL
@@ -245,25 +245,25 @@ def profile(request, steam_id=-1) :
 
 def game(request,steam_id,app_id) :
 	
-	game=steamAcc.return_game_info(steam_id,app_id)
+	gameInfo=steamAcc.return_game_info(steam_id,app_id)
 	profile=steamAcc.return_account_info(steam_id)
 	#print(game)
 	hours_time={
-		'weeks' : (game['hours_played']/168),
-		'days' : (game['hours_played']%168)/24,
-		'hours' : ((game['hours_played']%168)%24)
+		'weeks' : (gameInfo['hours_played']/168),
+		'days' : (gameInfo['hours_played']%168)/24,
+		'hours' : ((gameInfo['hours_played']%168)%24)
 	}
-	hr_data_game=game['hours_played']
+	hr_data_game=gameInfo['hours_played']
 	hr_data_other=profile['account']['total_hours_played']-hr_data_game
-	achv_data_game=game['completed_achv']
+	achv_data_game=gameInfo['completed_achv']
 	achv_data_other=profile['account']['total_completed_achv']-achv_data_game
-	achv_data_percent=int(round((float(game['completed_achv'])/float(game['all_achv'])) * 100))#float(profile['account']['total_completed_achv'])) * 100))
+	achv_data_percent=int(round((float(gameInfo['completed_achv'])/float(gameInfo['all_achv'])) * 100))#float(profile['account']['total_completed_achv'])) * 100))
 	#print(achv_data_percent)
 	#print(hr_data_game)
 	#print(hr_data_other)
 	game_data={
 		'profile':profile,
-		'game':game,
+		'gameInfo':gameInfo,
 		'hours_time':hours_time,
 		'hr_data':[hr_data_game,hr_data_other],
 		'achv_data':[achv_data_percent,achv_data_game,achv_data_other]
