@@ -16,6 +16,11 @@ Classic connect4 online game
 
 ![](https://raw.githubusercontent.com/bumjung/steam_projects/master/static/pics/main_page.png)
 
-##### In-Game Example:
+##### Summary Page:
 
 ![](https://raw.githubusercontent.com/bumjung/steam_projects/master/static/pics/app_example.png)
+
+##### Specific Game Page:
+
+![](https://raw.githubusercontent.com/bumjung/steam_projects/master/static/pics/game_page.png)
+
