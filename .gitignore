@@ -1,6 +1,5 @@
 mongo_data/
 mongodb/
-static/
 *.pyc
 venv
 exceptions.log
