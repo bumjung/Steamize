@@ -1,14 +1,13 @@
-connect4
+Steamize
 ========
 
-Classic connect4 online game
+A Steam (Online Game Platform) user summary application
 
 ### Dependencies:
 
-  * Node
-  * Express
-  * Socket.IO
-  * Jade
+  * Python
+  * Django
+  * MongoDB
   
 ### Screenshots:
 
