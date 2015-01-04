@@ -3,6 +3,9 @@ Steamize
 
 A Steam (Online Game Platform) user summary application
 
+Link: [http://steamize.bumjung.com](http://steamize.bumjung.com)
+(Run by Heroku)
+
 ### Dependencies:
 
   * Python
